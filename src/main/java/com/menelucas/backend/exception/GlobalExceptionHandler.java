@@ -33,7 +33,6 @@ public class GlobalExceptionHandler {
     }
 
 
-    // Para outras exceções inesperadas
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleException(Exception ex) {
         ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());

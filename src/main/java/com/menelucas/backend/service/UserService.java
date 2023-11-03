@@ -1,6 +1,5 @@
 package com.menelucas.backend.service;
 
-import com.menelucas.backend.exception.EmailAlreadyExistsException;
 import com.menelucas.backend.model.User;
 import com.menelucas.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class UserService {
         List<User> users = userRepository.findAllByEmail(user.getEmail());
 
         if (!users.isEmpty()) {
-            throw new EmailAlreadyExistsException("Email already exists");
+            throw new RuntimeException("Email already exists");
         }
 
 
