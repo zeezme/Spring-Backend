@@ -1,9 +1,8 @@
-package com.menelucas.backend.controller;
+package com.menelucas.backend.modules.auth;
 
-import com.menelucas.backend.model.dto.AuthenticationRequest;
-import com.menelucas.backend.model.dto.AuthenticationResponse;
-import com.menelucas.backend.model.dto.RegisterRequest;
-import com.menelucas.backend.service.AuthenticationService;
+import com.menelucas.backend.modules.auth.dto.AuthenticationRequest;
+import com.menelucas.backend.modules.auth.dto.AuthenticationResponse;
+import com.menelucas.backend.modules.auth.dto.RegisterRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

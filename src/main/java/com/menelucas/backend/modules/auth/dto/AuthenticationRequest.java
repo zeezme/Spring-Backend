@@ -1,4 +1,4 @@
-package com.menelucas.backend.model.dto;
+package com.menelucas.backend.modules.auth.dto;
 
 
 import lombok.AllArgsConstructor;

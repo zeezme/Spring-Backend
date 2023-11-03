@@ -1,7 +1,5 @@
-package com.menelucas.backend.service;
+package com.menelucas.backend.modules.user;
 
-import com.menelucas.backend.model.User;
-import com.menelucas.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

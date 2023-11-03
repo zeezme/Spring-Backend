@@ -1,5 +1,6 @@
-package com.menelucas.backend.model;
-import com.menelucas.backend.auth.Role;
+package com.menelucas.backend.modules.user;
+import com.menelucas.backend.modules.auth.Role;
+import com.menelucas.backend.modules.auth.Token;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -57,6 +58,10 @@ public class User implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public String setPassword(String password) {
+        return this.password = password;
     }
 
     @Override

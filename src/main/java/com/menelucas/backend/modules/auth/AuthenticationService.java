@@ -1,18 +1,14 @@
-package com.menelucas.backend.service;
+package com.menelucas.backend.modules.auth;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.menelucas.backend.auth.Role;
-import com.menelucas.backend.auth.TokenType;
 import com.menelucas.backend.config.JwtService;
 import com.menelucas.backend.exception.EmailAlreadyExistsException;
-import com.menelucas.backend.model.Token;
-import com.menelucas.backend.model.User;
-import com.menelucas.backend.model.dto.AuthenticationRequest;
-import com.menelucas.backend.model.dto.AuthenticationResponse;
-import com.menelucas.backend.model.dto.RegisterRequest;
-import com.menelucas.backend.repository.TokenRepository;
-import com.menelucas.backend.repository.UserRepository;
+import com.menelucas.backend.modules.auth.dto.AuthenticationRequest;
+import com.menelucas.backend.modules.auth.dto.AuthenticationResponse;
+import com.menelucas.backend.modules.auth.dto.RegisterRequest;
+import com.menelucas.backend.modules.user.User;
+import com.menelucas.backend.modules.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

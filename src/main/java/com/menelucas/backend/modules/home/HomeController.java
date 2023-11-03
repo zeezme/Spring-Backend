@@ -1,4 +1,4 @@
-package com.menelucas.backend.controller;
+package com.menelucas.backend.modules.home;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,6 @@
 package com.menelucas.backend.auditing;
 
-import com.menelucas.backend.model.User;
+import com.menelucas.backend.modules.user.User;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

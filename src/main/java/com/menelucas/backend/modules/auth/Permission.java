@@ -1,4 +1,4 @@
-package com.menelucas.backend.auth;
+package com.menelucas.backend.modules.auth;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
