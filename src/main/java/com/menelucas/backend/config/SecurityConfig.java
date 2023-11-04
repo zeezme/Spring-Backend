@@ -40,6 +40,7 @@ class SecurityConfig {
                                // .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
                                // .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
                                 .requestMatchers(GET, "/api").hasAuthority("ROLE_" + USER.name())
+                                .requestMatchers(POST, "/api/users/change-password").hasAuthority("ROLE_" + USER.name())
                                 .anyRequest()
                                 .authenticated()
                 )

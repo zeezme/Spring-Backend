@@ -60,8 +60,12 @@ public class User implements UserDetails {
         return password;
     }
 
-    public String setPassword(String password) {
-        return this.password = password;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override
