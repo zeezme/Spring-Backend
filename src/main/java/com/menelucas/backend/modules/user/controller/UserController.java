@@ -1,13 +1,15 @@
-package com.menelucas.backend.modules.user;
+package com.menelucas.backend.modules.user.controller;
 
+import com.menelucas.backend.modules.user.model.User;
+import com.menelucas.backend.modules.user.service.UserService;
 import com.menelucas.backend.modules.user.dto.PasswordChangeRequest;
+import com.menelucas.backend.modules.user.service.CustomUserDetailsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,7 @@ public class UserController {
 
             return ResponseEntity.ok().body("Password changed successfully.");
         }
+        //Redundante, pois o filtro pegaria o erro antes.
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }

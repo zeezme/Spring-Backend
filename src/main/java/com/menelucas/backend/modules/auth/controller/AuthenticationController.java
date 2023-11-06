@@ -1,8 +1,9 @@
-package com.menelucas.backend.modules.auth;
+package com.menelucas.backend.modules.auth.controller;
 
 import com.menelucas.backend.modules.auth.dto.AuthenticationRequest;
 import com.menelucas.backend.modules.auth.dto.AuthenticationResponse;
 import com.menelucas.backend.modules.auth.dto.RegisterRequest;
+import com.menelucas.backend.modules.auth.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -28,6 +29,7 @@ public class AuthenticationController {
     ) {
         return ResponseEntity.ok(service.register(request));
     }
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request

@@ -1,6 +1,7 @@
-package com.menelucas.backend.modules.auth;
+package com.menelucas.backend.modules.auth.model;
 
-import com.menelucas.backend.modules.user.User;
+import com.menelucas.backend.modules.auth.TokenType;
+import com.menelucas.backend.modules.user.model.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

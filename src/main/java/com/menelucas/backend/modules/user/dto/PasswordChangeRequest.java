@@ -15,6 +15,4 @@ public class PasswordChangeRequest {
     private String oldPassword;
     @NotBlank(message = "New password is mandatory")
     private String newPassword;
-    @NotBlank(message = "Confirm password is mandatory")
-    private String confirmPassword;
 }

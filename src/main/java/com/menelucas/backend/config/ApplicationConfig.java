@@ -1,8 +1,8 @@
 package com.menelucas.backend.config;
 
 import com.menelucas.backend.auditing.ApplicationAuditAware;
-import com.menelucas.backend.modules.user.CustomUserDetailsService;
-import com.menelucas.backend.modules.user.UserRepository;
+import com.menelucas.backend.modules.user.service.CustomUserDetailsService;
+import com.menelucas.backend.modules.user.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

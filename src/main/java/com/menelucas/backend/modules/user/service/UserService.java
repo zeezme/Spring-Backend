@@ -1,7 +1,8 @@
-package com.menelucas.backend.modules.user;
+package com.menelucas.backend.modules.user.service;
 
+import com.menelucas.backend.modules.user.model.User;
+import com.menelucas.backend.modules.user.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class UserService {
 
         if (!passwordEncoder.matches(oldPassword, oldPasswordFromDB)) {
 
-            throw new RuntimeException("Invalid old password");
+            throw new RuntimeException("Old password is incorrect");
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));

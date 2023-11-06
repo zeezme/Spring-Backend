@@ -1,4 +1,6 @@
-package com.menelucas.backend.modules.user;
+package com.menelucas.backend.modules.user.service;
+import com.menelucas.backend.modules.user.model.User;
+import com.menelucas.backend.modules.user.dao.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

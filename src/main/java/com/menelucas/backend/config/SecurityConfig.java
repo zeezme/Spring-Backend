@@ -34,13 +34,17 @@ class SecurityConfig {
                 .authorizeHttpRequests((req) ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                               // .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
-                               // .requestMatchers(GET, "/teste").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
-                               // .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
-                               // .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
-                               // .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
+                                // .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+                                // .requestMatchers(GET, "/teste").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+                                // .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
+                                // .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
+                                // .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
                                 .requestMatchers(GET, "/api").hasAuthority("ROLE_" + USER.name())
                                 .requestMatchers(POST, "/api/users/change-password").hasAuthority("ROLE_" + USER.name())
+                                .requestMatchers(POST, "/api/forms/create").hasAuthority("ROLE_" + ADMIN.name())
+                                .requestMatchers(POST, "/api/forms/insert-item").hasAuthority("ROLE_" + ADMIN.name())
+                                .requestMatchers(DELETE, "/api/forms/delete-item/**").hasAuthority("ROLE_" + ADMIN.name())
+                                .requestMatchers(DELETE, "/api/forms/delete-form/**").hasAuthority("ROLE_" + ADMIN.name())
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -49,11 +53,8 @@ class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
 
-
-
         return http.build();
     }
-
 
 
 }
