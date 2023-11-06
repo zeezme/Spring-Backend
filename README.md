@@ -1,6 +1,5 @@
 # Spring-Backend
-  API em desenvolvimento para uma aplicação de gestão de times esportivos, o projeto está sendo desenvolvido utilizando Spring Boot, Spring Security, Hibernate e PostgreSQL
-Até o momento a aplicação conta com um sistema de autenticação que envolve filtros de validação de token JWT para autenticação e autorização de rota.
+  API em desenvolvimento para uma aplicação de gestão de times esportivos, o projeto está sendo desenvolvido utilizando Spring Boot, Spring Security, Hibernate e PostgreSQL, até o momento a aplicação conta com um sistema de autenticação que envolve filtros de validação de token JWT para autenticação e autorização de rota.
 
 ## Endpoints disponíveis
 
