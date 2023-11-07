@@ -12,13 +12,23 @@ public class FormResponse {
 
     @ManyToOne
     @JoinColumn(name = "form_item_id", nullable = false)
-    private FormItem formItem;
+    private FormItem formItemId;
 
     @Column(nullable = false)
     private String answer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "user_id")
+    private Integer userId;
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setFormItemId(FormItem formItemId) {
+        this.formItemId = formItemId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

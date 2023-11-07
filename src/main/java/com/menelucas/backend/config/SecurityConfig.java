@@ -45,6 +45,8 @@ class SecurityConfig {
                                 .requestMatchers(POST, "/api/forms/insert-item").hasAuthority("ROLE_" + ADMIN.name())
                                 .requestMatchers(DELETE, "/api/forms/delete-item/**").hasAuthority("ROLE_" + ADMIN.name())
                                 .requestMatchers(DELETE, "/api/forms/delete-form/**").hasAuthority("ROLE_" + ADMIN.name())
+                                .requestMatchers(POST, "/api/form/answer-item").hasAuthority("ROLE_" + USER.name())
+                                .requestMatchers(GET, "/get-form-responses-by-user-and-form/**").hasAuthority("ROLE_" + USER.name())
                                 .anyRequest()
                                 .authenticated()
                 )

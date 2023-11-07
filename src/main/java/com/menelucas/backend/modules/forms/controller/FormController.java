@@ -2,6 +2,7 @@ package com.menelucas.backend.modules.forms.controller;
 
 import com.menelucas.backend.modules.forms.dto.FormCreationRequest;
 import com.menelucas.backend.modules.forms.dto.FormItemRequest;
+import com.menelucas.backend.modules.forms.dto.FormResponseRequest;
 import com.menelucas.backend.modules.forms.service.FormService;
 import com.menelucas.backend.modules.shared.util.AuthenticationFacade;
 import com.menelucas.backend.modules.user.service.CustomUserDetailsService;
@@ -58,5 +59,21 @@ public class FormController {
         formService.deleteForm(formId, user);
 
         return ResponseEntity.ok().body("Form deleted successfully.");
+    }
+
+    @PostMapping("/answer-item")
+    public ResponseEntity<?> answerItem(@Valid @RequestBody FormResponseRequest request) {
+        User user = authenticationFacade.getAuthenticatedUser();
+
+        formService.answerFormItem(Integer.valueOf(request.getFormItemId()), request.getAnswer(), user);
+
+        return ResponseEntity.ok().body("Item answered successfully.");
+    }
+
+    @GetMapping("/get-form-responses-by-user-and-form/{userId}/{formId}")
+    public ResponseEntity<?> getFormResponsesByUserAndForm(@PathVariable("userId") Integer userId, @PathVariable("formId") Integer formId) {
+        User user = authenticationFacade.getAuthenticatedUser();
+
+        return ResponseEntity.ok().body(formService.getFormResponseByUserAndForm(userId, formId, user));
     }
 }
