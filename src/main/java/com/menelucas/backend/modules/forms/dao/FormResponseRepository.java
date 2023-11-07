@@ -13,6 +13,8 @@ import java.util.List;
 
 @Repository
 public interface FormResponseRepository extends JpaRepository<FormResponse, Integer> {
+
+    boolean existsByFormItemId_Id(Integer formItemId);
     @Query("SELECT new com.menelucas.backend.modules.forms.dto.FormResponseByUserAndForm(f.id, f.title, fi.question, fr.answer) " +
             "FROM FormResponse fr " +
             "INNER JOIN fr.formItemId fi " +

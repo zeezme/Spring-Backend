@@ -1,4 +1,5 @@
 package com.menelucas.backend.modules.forms.service;
+import com.menelucas.backend.exception.AlreadyExistsException;
 import com.menelucas.backend.modules.auth.Role;
 import com.menelucas.backend.modules.forms.dao.FormItemRepository;
 import com.menelucas.backend.modules.forms.dao.FormRepository;
@@ -77,6 +78,10 @@ public class FormService {
         FormItem formItem = formItemRepository.findById(formItemId)
                 .orElseThrow(() -> new EntityNotFoundException("Form item not found with id " + formItemId));
 
+        if (formResponseRepository.existsByFormItemId_Id(formItemId)) {
+            throw new AlreadyExistsException("Item already answered");
+        }
+        
         FormResponse formResponse = new FormResponse();
         formResponse.setAnswer(answer);
         formResponse.setFormItemId(formItem);
