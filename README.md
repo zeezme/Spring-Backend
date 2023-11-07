@@ -14,6 +14,8 @@
 | DELETE  | `/api/forms/delete-item/{item_id}`                                  | Deleta item do Formulário                                    | NONE                                                                                  | PADRÃO                                                                               |
 | DELETE  | `/api/forms/delete-form/{form_id}`                                  | Deleta o formulário                                          | NONE                                                                                  | PADRÃO                                                                               |
 | GET     | `/api/forms/get-form-responses-by-user-and-form/{user_id}/{form_id}` | Lista as perguntas respondidas por usuário e por formulário  | NONE                                                                                  | `[{ "formId": integer, "title": "string", "question": "string", "answer": "string" }]` |
+| POST     | `/api/form/answer-item` | Responder pergunta do formulário | `{ "formItemId":"string", "answer": "string"}` | PADRÃO  |
+
 
 **Nota:** Um retorno "PADRÃO" pode ser uma mensagem de sucesso, erro ou 403
 
