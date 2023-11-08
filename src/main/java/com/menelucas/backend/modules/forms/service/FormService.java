@@ -71,7 +71,6 @@ public class FormService {
         }
 
         formRepository.delete(form);
-
     }
 
     public void answerFormItem(Integer formItemId, String answer, User user) {
@@ -104,6 +103,7 @@ public class FormService {
         }
         return formResponseRepository.findFormResponsesByUserIdAndFormId(userId, formId);
     }
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.menelucas.backend.modules.user.controller;
 
+import com.menelucas.backend.modules.shared.util.AuthenticationFacade;
 import com.menelucas.backend.modules.user.model.User;
 import com.menelucas.backend.modules.user.service.UserService;
 import com.menelucas.backend.modules.user.dto.PasswordChangeRequest;
@@ -22,23 +23,17 @@ public class UserController {
 
     private final UserService userService;
     private final CustomUserDetailsService customUserDetailsService;
+    private final AuthenticationFacade authenticationFacade;
+
 
 
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@Valid @RequestBody PasswordChangeRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            String username = authentication.getName();
+            User loggedUser = authenticationFacade.getAuthenticatedUser();
 
-            User user = customUserDetailsService.getUserObjectByUsername(username);
-
-            Integer userId = customUserDetailsService.loadUserIDByUsername(username);
-
-            userService.changePassword(user,userId, request.getOldPassword(), request.getNewPassword());
+            userService.changePassword(loggedUser, request.getOldPassword(), request.getNewPassword());
 
             return ResponseEntity.ok().body("Password changed successfully.");
-        }
-        //Redundante, pois o filtro pegaria o erro antes.
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
     }
 }

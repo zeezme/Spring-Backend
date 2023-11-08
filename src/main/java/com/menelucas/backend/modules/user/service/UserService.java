@@ -14,28 +14,25 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public User changePassword(User user, String oldPassword, String newPassword) {
 
-    public User createUser(User user) {
-        List<User> users = userRepository.findAllByEmail(user.getEmail());
-
-        if (!users.isEmpty()) {
-            throw new RuntimeException("Email already exists");
-        }
-
-        return userRepository.save(user);
-    }
-
-    public User changePassword(User user, Integer userId, String oldPassword, String newPassword) {
-        String oldPasswordFromDB = userRepository.findById(userId.longValue()).get().getPassword();
+        String oldPasswordFromDB = userRepository.findById(user.getId().longValue()).get().getPassword();
 
         if (!passwordEncoder.matches(oldPassword, oldPasswordFromDB)) {
-
             throw new RuntimeException("Old password is incorrect");
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));
 
         return userRepository.save(user);
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public User getUserById(Integer userId){
+        return userRepository.findById(userId.longValue()).get();
     }
 
 }
