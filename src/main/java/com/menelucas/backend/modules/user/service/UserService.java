@@ -16,7 +16,7 @@ public class UserService {
 
     public User changePassword(User user, String oldPassword, String newPassword) {
 
-        String oldPasswordFromDB = userRepository.findById(user.getId().longValue()).get().getPassword();
+        String oldPasswordFromDB = userRepository.findById(user.getId()).get().getPassword();
 
         if (!passwordEncoder.matches(oldPassword, oldPasswordFromDB)) {
             throw new RuntimeException("Old password is incorrect");
@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public User getUserById(Integer userId){
-        return userRepository.findById(userId.longValue()).get();
+        return userRepository.findById(userId).get();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.menelucas.backend.modules.forms.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.menelucas.backend.modules.user.model.User;
 import jakarta.persistence.*;
 
@@ -8,27 +9,29 @@ import jakarta.persistence.*;
 public class FormResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "form_item_id", nullable = false)
-    private FormItem formItemId;
+    @JoinColumn(name = "form_item", nullable = false)
+    private FormItem formItem;
 
     @Column(nullable = false)
     private String answer;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "\"user\"", nullable = false)
+    @JsonBackReference
+    private User user;
 
     public void setAnswer(String answer) {
         this.answer = answer;
     }
 
-    public void setFormItemId(FormItem formItemId) {
-        this.formItemId = formItemId;
+    public void setFormItem(FormItem formItem) {
+        this.formItem = formItem;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

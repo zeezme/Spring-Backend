@@ -27,7 +27,7 @@ public class FormController {
 
         User user = authenticationFacade.getAuthenticatedUser();
 
-        formService.createForm(request.getTitle(), user.getId());
+        formService.createForm(request.getTitle(), user.getId(), request.getRole());
 
         return ResponseEntity.ok().body("Form created successfully.");
 
@@ -65,7 +65,7 @@ public class FormController {
     public ResponseEntity<?> answerItem(@Valid @RequestBody FormResponseRequest request) {
         User user = authenticationFacade.getAuthenticatedUser();
 
-        formService.answerFormItem(Integer.valueOf(request.getFormItemId()), request.getAnswer(), user);
+        formService.answerFormItem(request.getFormItemId(), request.getAnswer(), user);
 
         return ResponseEntity.ok().body("Item answered successfully.");
     }
@@ -76,4 +76,30 @@ public class FormController {
 
         return ResponseEntity.ok().body(formService.getFormResponseByUserAndForm(userId, formId, user));
     }
+
+    @GetMapping("/get-forms")
+    public ResponseEntity<?> getAllForms() {
+        User user = authenticationFacade.getAuthenticatedUser();
+
+        return ResponseEntity.ok().body(formService.getAllForms(user));
+    }
+
+    @GetMapping("/get-forms/{id}")
+    public ResponseEntity<?> getFormById(@PathVariable("id") Integer formId) {
+        User user = authenticationFacade.getAuthenticatedUser();
+
+        return ResponseEntity.ok().body(formService.getFormById(formId, user));
+    }
+
+    @GetMapping("/get-form-items/{id}")
+    public ResponseEntity<?> getFormItemsById(@PathVariable("id") Integer formId) {
+        User user = authenticationFacade.getAuthenticatedUser();
+        return ResponseEntity.ok().body(formService.getFormItems(formId, user));
+    }
+
+    @GetMapping("/get-who-answered/{id}")
+    public ResponseEntity<?> getWhoAnswered(@PathVariable("id") Integer formId) {
+        return ResponseEntity.ok().body(formService.getWhoAnswered(formId));
+    }
+
 }

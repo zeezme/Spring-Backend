@@ -1,4 +1,5 @@
 package com.menelucas.backend.modules.user.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.menelucas.backend.modules.auth.Role;
 import com.menelucas.backend.modules.auth.model.Token;
 import jakarta.persistence.Entity;
@@ -48,6 +49,7 @@ public class User implements UserDetails {
 
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Token> tokens;
 
     @Override

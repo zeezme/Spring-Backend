@@ -1,6 +1,7 @@
 package com.menelucas.backend.modules.forms.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FormResponseRequest {
-    @NotBlank(message = "Property formItemId is mandatory")
-    private String formItemId;
+    @NotNull(message = "Form item id is mandatory")
+    private Integer formItemId;
     @NotBlank(message = "Property answer is mandatory")
     private String answer;
 }

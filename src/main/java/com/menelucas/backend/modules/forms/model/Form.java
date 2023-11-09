@@ -1,5 +1,6 @@
 package com.menelucas.backend.modules.forms.model;
 
+import com.menelucas.backend.modules.auth.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,9 @@ public class Form {
     @OneToMany(mappedBy = "form", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FormItem> formItems;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public String getTitle() {
         return title;
     }
@@ -50,5 +54,13 @@ public class Form {
     public void removeFormItem(FormItem formItem) {
         this.formItems.remove(formItem);
         formItem.setForm(null);
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }
