@@ -3,8 +3,16 @@ package com.menelucas.backend.modules.forms.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.menelucas.backend.modules.user.model.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "form_responses")
 public class FormResponse {
     @Id

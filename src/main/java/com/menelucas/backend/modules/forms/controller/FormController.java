@@ -3,6 +3,7 @@ package com.menelucas.backend.modules.forms.controller;
 import com.menelucas.backend.modules.forms.dto.FormCreationRequest;
 import com.menelucas.backend.modules.forms.dto.FormItemRequest;
 import com.menelucas.backend.modules.forms.dto.FormResponseRequest;
+import com.menelucas.backend.modules.forms.dto.FormResponseUpdateRequest;
 import com.menelucas.backend.modules.forms.service.FormService;
 import com.menelucas.backend.modules.shared.util.AuthenticationFacade;
 import com.menelucas.backend.modules.user.service.CustomUserDetailsService;
@@ -100,6 +101,24 @@ public class FormController {
     @GetMapping("/get-who-answered/{id}")
     public ResponseEntity<?> getWhoAnswered(@PathVariable("id") Integer formId) {
         return ResponseEntity.ok().body(formService.getWhoAnswered(formId));
+    }
+
+    @DeleteMapping("/delete-form-response/{id}")
+    public ResponseEntity<?> deleteFormResponse(@Valid @PathVariable("id") Integer formItemId) {
+        User user = authenticationFacade.getAuthenticatedUser();
+
+        formService.deleteFormResponse(formItemId, user);
+
+        return ResponseEntity.ok().body("Item deleted successfully.");
+    }
+
+    @PatchMapping("/update-form-response/{id}")
+    public ResponseEntity<?> updateFormResponse(@Valid @PathVariable("id")  Integer formItemId, @RequestBody FormResponseUpdateRequest request) {
+        User user = authenticationFacade.getAuthenticatedUser();
+
+        formService.updateFormResponse(formItemId, request.getAnswer(), user);
+
+        return ResponseEntity.ok().body("Item updated successfully.");
     }
 
 }

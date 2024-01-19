@@ -86,7 +86,7 @@ public class FormService {
         if (formResponseRepository.existsByFormItem_IdAndUser_Id(formItemId, user.getId())) {
             throw new AlreadyExistsException("You already answered this form item");
         }
-        
+
         FormResponse formResponse = new FormResponse();
 
         formResponse.setAnswer(answer);
@@ -129,7 +129,7 @@ public class FormService {
         return formsByRole;
     }
 
-    public Form getFormById(Integer formId,User user) {
+    public Form getFormById(Integer formId, User user) {
         if (user.getRole().equals(Role.ADMIN)) {
             Form form = formRepository.findById(formId).orElseThrow(() -> new EntityNotFoundException("Form not found with id " + formId));
 
@@ -154,23 +154,48 @@ public class FormService {
 
         Form form = formRepository.findByIdAndRole(formId, user.getRole());
 
-       return formItemRepository.findAllByFormAndForm_Role(form, user.getRole());
+        return formItemRepository.findAllByFormAndForm_Role(form, user.getRole());
     }
+
     public Set<MinimalUserResponse> getWhoAnswered(Integer formId) {
         Form form = formRepository.findById(formId)
                 .orElseThrow(() -> new EntityNotFoundException("Form not found with id " + formId));
 
-        // Este método deve retornar um Set<User>, com base na sua consulta JPA.
         Set<User> users = formResponseRepository.findDistinctUsersByFormItemForm(form);
 
-        // Agora convertemos esse Set<User> para Set<MinimalUserResponse>
         return users.stream()
-                .map(user -> new MinimalUserResponse(user.getId(), user.getFirstname(), user.getEmail()))
+                .map(user -> MinimalUserResponse.builder()
+                        .id(user.getId())
+                        .firstname(user.getFirstname())
+                        .email(user.getEmail())
+                        .build())
                 .collect(Collectors.toSet());
     }
 
+    public void deleteFormResponse(Integer formResponseId, User user) {
+        FormResponse formResponse = formResponseRepository.findById(formResponseId)
+                .orElseThrow(() -> new EntityNotFoundException("Form response not found with id " + formResponseId));
+
+        if (formResponse.getUser().getId() != user.getId()) {
+            throw new EntityNotFoundException("You can only delete your own form responses");
+        }
+
+        formResponseRepository.deleteById(formResponse.getId());
+    }
+
+    public void updateFormResponse(Integer formResponseId, String answer, User user) {
+        FormResponse formResponse = formResponseRepository.findById(formResponseId)
+                .orElseThrow(() -> new EntityNotFoundException("Form response not found with id " + formResponseId));
+
+        if (formResponse.getUser().getId() != user.getId()) {
+            throw new EntityNotFoundException("You can only update your own form responses");
+        }
+
+        formResponse.setAnswer(answer);
+
+        formResponseRepository.save(formResponse);
+    }
 
 
-
-
+    
 }
