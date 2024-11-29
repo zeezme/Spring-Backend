@@ -35,10 +35,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        List<User> users = repository.findAllByEmail(request.getEmail());
-        if (!users.isEmpty()) {
+        var userExists = repository.findAllByEmail(request.getEmail());
+
+        if (userExists.isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
+        
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
